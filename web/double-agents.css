@@ -1,0 +1,13 @@
+h1, h2, h3 {
+   color: #36C;
+   font-weight: normal;
+   letter-spacing: .4em;
+   margin-bottom: 1em;
+}
+body {
+	background-color: powderblue;
+}
+#mapid {
+	height: 500px;
+	width: 800px;
+}
