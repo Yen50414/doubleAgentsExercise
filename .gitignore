@@ -3,3 +3,9 @@
 
 # Ignore compiled classes
 /build
+
+# Ignore eclipse generated files
+.classpath
+.project
+.settings/
+bin/
