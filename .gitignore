@@ -1,0 +1,5 @@
+# Ignore Gradle cache files
+.gradle
+
+# Ignore compiled classes
+/build
