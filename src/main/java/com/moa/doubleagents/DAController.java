@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class DAController {
-	@RequestMapping("/")
+	/*@RequestMapping("/")
 	public String index() {
 		return "Greetings from Spring Boot!";
-	}
+	}*/
 }
