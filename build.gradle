@@ -43,6 +43,10 @@ dependencies {
     // The production code uses the SLF4J logging API at compile time
     compile 'org.slf4j:slf4j-api:1.7.21'
     
+    // Use Apache Commons CSV to read CSV file
+    // https://mvnrepository.com/artifact/org.apache.commons/commons-csv
+	compile("org.apache.commons:commons-csv:1.4")
+    
     // tag::jetty[]
     compile("org.springframework.boot:spring-boot-starter-web") {
         exclude module: "spring-boot-starter-tomcat"
