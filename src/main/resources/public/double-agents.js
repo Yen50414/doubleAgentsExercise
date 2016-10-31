@@ -14,6 +14,8 @@ var mapUrl = 'https://api.mapbox.com/styles/v1/' + mapboxId + '/ciuxwzl0t004b2ip
 var mymap;
 var agentsData = [];
 var agentMarkers = [];
+var maleMarkers = L.layerGroup();
+var femaleMarkers = L.layerGroup();
 
 // Run code once document is finished loading.
 $(document).ready( function () {
@@ -21,17 +23,26 @@ $(document).ready( function () {
 	// Draw map through leafletjs
 	mymap = drawMap();
 	
-	// Test point
-	var point = L.circleMarker([40.00579,-83.0278], {
+	// Test marker
+	var marker = L.circleMarker([40.00579,-83.0278], {
 		color: 'yellow',
 		fillColor: 'yellow',
 		fillOpacity: 0.5,
 		radius: 10
 	}).addTo(mymap);
-	point.bindPopup("<b>Arthur Mo</b><br>26, Male");
+	marker.bindPopup("<b>Arthur Mo</b><br>26, Male");
 	
 	// Draw initial data points
 	drawData();
+	mymap.addLayer(maleMarkers);
+	mymap.addLayer(femaleMarkers);
+	
+	// Add layer control to filter male vs female
+	var overlayMaps = {
+		"Male": maleMarkers,
+		"Female": femaleMarkers
+	};
+	L.control.layers(null, overlayMaps, { collapsed: false }).addTo(mymap);
 })
 
 function drawMap() {
@@ -72,26 +83,29 @@ function drawAgents() {
 }
 
 function drawAgent(agentData) {
-	console.log(agentData);
 	
-	//var color = 'Orchid';
-	//var color = 'Aquamarine';
 	var color;
+	var markerLayer;
 	if(agentData.gender == "Male") {
 		color = 'Aquamarine';
+		markerLayer = maleMarkers;
 	} else {
 		color = 'Orchid';
+		markerLayer = femaleMarkers;
 	}
 	
-	//var point = L.marker([agentData.latitude,agentData.longitude]).addTo(mymap);
-	var point = L.circleMarker([agentData.latitude,agentData.longitude], {
+	//var marker = L.marker([agentData.latitude,agentData.longitude]).addTo(mymap);
+	var marker = L.circleMarker([agentData.latitude,agentData.longitude], {
 		color: color,
 		fillColor: color,
 		fillOpacity: 0.5,
 		radius : 10
-	}).addTo(mymap);
-	point.bindPopup("<b>" + agentData.name + "</b><br>" + agentData.age + ", " + agentData.gender);
-	return point;
+	});//.addTo(mymap);
+	marker.bindPopup("<b>" + agentData.name + "</b><br>" + agentData.age + ", " + agentData.gender);
+	
+	markerLayer.addLayer(marker);
+	
+	return marker;
 }
 
 function sayHello() {
