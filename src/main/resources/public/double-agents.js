@@ -43,6 +43,15 @@ $(document).ready( function () {
 		"Female": femaleMarkers
 	};
 	L.control.layers(null, overlayMaps, { collapsed: false }).addTo(mymap);
+	
+	// Redraw if max age is changed
+	$(".filter").change( function() {
+		// Clear existing markers
+		maleMarkers.clearLayers();
+		femaleMarkers.clearLayers();
+		
+		drawAgents($("#minAge").val(), $("#maxAge").val());
+	});
 })
 
 function drawMap() {
@@ -71,14 +80,17 @@ function drawData() {
 			agentsData.push(agent);
 		});
 	}).done( function() {
-		drawAgents();
+		drawAgents($("#minAge").val(), $("#maxAge").val());
 	});
 }
 
-function drawAgents() {
+function drawAgents(minAge, maxAge) {
 	// Loop through all data points
 	agentsData.forEach( function(agent) {
-		agentMarkers.push(drawAgent(agent));
+		if(agent.age >= minAge && agent.age < maxAge) { // Draw only if age less than max age
+			console.log(agent.age);
+			agentMarkers.push(drawAgent(agent));
+		}
 	});
 }
 
@@ -106,8 +118,4 @@ function drawAgent(agentData) {
 	markerLayer.addLayer(marker);
 	
 	return marker;
-}
-
-function sayHello() {
-	alert("Hello World from double-agent.js")
 }
