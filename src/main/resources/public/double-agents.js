@@ -23,15 +23,6 @@ $(document).ready( function () {
 	// Draw map through leafletjs
 	mymap = drawMap();
 	
-	// Test marker
-	var marker = L.circleMarker([40.00579,-83.0278], {
-		color: 'yellow',
-		fillColor: 'yellow',
-		fillOpacity: 0.5,
-		radius: 10
-	}).addTo(mymap);
-	marker.bindPopup("<b>Arthur Mo</b><br>26, Male");
-	
 	// Draw initial data points
 	drawData();
 	mymap.addLayer(maleMarkers);
@@ -44,13 +35,13 @@ $(document).ready( function () {
 	};
 	L.control.layers(null, overlayMaps, { collapsed: false }).addTo(mymap);
 	
-	// Redraw if max age is changed
+	// Redraw if filter is changed
 	$(".filter").change( function() {
 		// Clear existing markers
 		maleMarkers.clearLayers();
 		femaleMarkers.clearLayers();
 		
-		drawAgents($("#minAge").val(), $("#maxAge").val());
+		drawAgents($("#minAge").val(), $("#maxAge").val(), $("#search").val());
 	});
 })
 
@@ -80,22 +71,22 @@ function drawData() {
 			agentsData.push(agent);
 		});
 	}).done( function() {
-		drawAgents($("#minAge").val(), $("#maxAge").val());
+		drawAgents($("#minAge").val(), $("#maxAge").val(), $("#search").val());
 	});
 }
 
-function drawAgents(minAge, maxAge) {
+function drawAgents(minAge, maxAge, term) {
 	// Loop through all data points
 	agentsData.forEach( function(agent) {
-		if(agent.age >= minAge && agent.age < maxAge) { // Draw only if age less than max age
-			console.log(agent.age);
-			agentMarkers.push(drawAgent(agent));
+		// Draw only if age less than max age
+		if(agent.age >= minAge && agent.age < maxAge
+		&& agent.name.toLowerCase().includes(term.toLowerCase())) {
+			drawAgent(agent);
 		}
 	});
 }
 
 function drawAgent(agentData) {
-	
 	var color;
 	var markerLayer;
 	if(agentData.gender == "Male") {
@@ -106,13 +97,12 @@ function drawAgent(agentData) {
 		markerLayer = femaleMarkers;
 	}
 	
-	//var marker = L.marker([agentData.latitude,agentData.longitude]).addTo(mymap);
 	var marker = L.circleMarker([agentData.latitude,agentData.longitude], {
 		color: color,
 		fillColor: color,
 		fillOpacity: 0.5,
 		radius : 10
-	});//.addTo(mymap);
+	});
 	marker.bindPopup("<b>" + agentData.name + "</b><br>" + agentData.age + ", " + agentData.gender);
 	
 	markerLayer.addLayer(marker);
