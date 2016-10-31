@@ -12,14 +12,7 @@ import org.apache.commons.csv.CSVRecord;
 
 public class DAModel {
 	
-	private List<Agent> agentList;
-	
-	public List<Agent> loadAgentData() {
-		//agentList = readAgentData("src/main/resources/data/cc-maps-data-set.csv");
-		return readAgentData("src/test/resources/data/moa-maps-data-set.csv");
-	}
-	
-	public List<Agent> readAgentData(String filename) {
+	public static List<Agent> readAgentData(String filename) {
 		
 		List<Agent> agentList = new ArrayList<Agent>();
 		

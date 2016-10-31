@@ -6,7 +6,7 @@ package com.moa.doubleagents.model;
  * @author Arthur
  */
 public class Agent {
-	
+
 	private String name;
 	private double lat;
 	private double lng;
@@ -57,4 +57,13 @@ public class Agent {
                 agent.age == age &&
                 agent.gender.equals(gender);
     }
+	
+	@Override
+	public String toString() {
+		return "{\"name\":\"" + name
+				+ "\",\"age\":" + age
+				+ ",\"gender\":\"" + gender
+				+ "\",\"latitude\":" + lat
+				+ ",\"longitude\":" + lng + "}";
+	}
 }
