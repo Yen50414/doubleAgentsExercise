@@ -5,40 +5,12 @@
 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css" />
 	<script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
 	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	
 	<link rel="stylesheet" href="double-agents.css" />
 	<script type="text/javascript" src="double-agents.js" ></script>
 </head>
 <body>
-	<!--h1>Locations of double-agent spies.</h1-->
-	
 	<div id="mapid"></div>
-		<script language="javascript" type="text/javascript">
-		
-			// Draw map through leafletjs
-			var mymap = L.map('mapid').setView([39.09596, -95.80078], 4);
-			
-			L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibW9hYm9hIiwiYSI6ImNpdXMwcm4wbzAwYXMyeXFqenpxYWJ6bzIifQ.3jc-XUbb1Crk6ruYsOWhxA', {
-				attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> ' +
-					'contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-					'Imagery © <a href="http://mapbox.com">Mapbox</a>',
-				maxZoom: 18,
-				minZoom: 4,
-				id: 'moaboa',
-				accessToken: 'pk.eyJ1IjoibW9hYm9hIiwiYSI6ImNpdXMwcm4wbzAwYXMyeXFqenpxYWJ6bzIifQ.3jc-XUbb1Crk6ruYsOWhxA'
-			}).addTo(mymap);
-			
-			// Somehow obtain data points from csv file
-			
-			// Loop through all data points
-			var i = 0;
-			while (i < 1) {
-				var latlng = L.latLng(34.014908, -118.158966);
-				//var marker = L.marker(latlng).addTo(mymap);
-				var marker = drawPoint(latlng).addTo(mymap);
-				i++;
-			}
-		</script>
-	
-	
 </body>
 </html>
