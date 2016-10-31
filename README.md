@@ -1,8 +1,15 @@
-# doubleAgentsExercise
+# Double Agents Exercise
 Exercise to learn leafletjs and Spring boot
 
-Instructions
+##Instructions
 
-Simply download the package and run the command from the base folder of this project:
-
+1. Download the package to your file system.
+2. Run this command from the base directory for this project:
+```
 gradlew bootRun
+```
+on Windows or 
+```
+./gradlew bootRun
+```
+on Unix-like platforms
